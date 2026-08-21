@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 Секретный тест: Чем тебя расстреляют?</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --text-main: #e0e0e0;
+            --text-muted: #888;
+            --accent: #ff4757;
+            --accent-hover: #ff6b81;
+            --border: #333;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: "СЕКРЕТНО // ГЛАЗАМИ НЕ ХЛОПАТЬ";
+            position: absolute;
+            top: 10px;
+            right: -35px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 40px;
+            font-size: 10px;
+            font-weight: bold;
+            transform: rotate(45deg);
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            color: var(--accent);
+            text-align: center;
+            margin-top: 10px;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+
+        .question-block {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            border-left: 3px solid var(--accent);
+            padding-left: 15px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            text-align: left;
+            transition: all 0.2s ease;
+        }
+
+        .option-btn:hover {
+            background: rgba(255, 71, 87, 0.1);
+            border-color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .result-block {
+            text-align: center;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        .result-weapon {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .result-desc {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-main);
+            background: rgba(255,255,255,0.03);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .restart-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-family: inherit;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .restart-btn:hover {
+            background: var(--accent-hover);
+        }
+
+        .disclaimer {
+            margin-top: 20px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="app">
+        <!-- Сюда рендерится тест -->
+    </div>
+    <p class="disclaimer">* Все совпадения случайны. Палачи не пострадали при создании этого теста.</p>
+</div>
+
+<script>
+    const quizData = [
+        {
+            question: "Твой утренний ритуал перед выходом из дома?",
+            options: [
+                { text: "Медитация и созерцание пылающих углей в камине.", type: "A" },
+                { text: "Бегу за кофе, опаздываю, всем недоволен.", type: "B" },
+                { text: "Читаю томик классики, тяжело вздыхаю.", type: "C" },
+                { text: "Копаюсь в гаджетах, калибрую умный дом.", type: "D" }
+            ]
+        },
+        {
+            question: "Как ты решаешь конфликты с врагами?",
+            options: [
+                { text: "Долго и нудно объясняю, кто прав, пока враг не состарится.", type: "A" },
+                { text: "Тыкаю в душу мелкими уколами и пассивной агрессией.", type: "B" },
+                { text: "Цитирую великих, пока оппонент не заплачет от красоты слога.", type: "C" },
+                { text: "Ослепляю фактами и неопровержимыми аргументами из Википедии.", type: "D" }
+            ]
+        },
+        {
+            question: "Что у тебя всегда в кармане?",
+            options: [
+                { text: "Старинная монета, спички и сушеная трава.", type: "A" },
+                { text: "Жвачка, фантики, ключи и куча мелочи.", type: "B" },
+                { text: "Ручка, блокнот и сломанное гусиное перо.", type: "C" },
+                { text: "Пауэрбанк, кабель Type-C и лазерная указка для кота.", type: "D" }
+            ]
+        },
+        {
+            question: "Твой главный экзистенциальный страх?",
+            options: [
+                { text: "Что время остановится, а я не успею допить чай.", type: "A" },
+                { text: "Что меня случайно примут за серьезного взрослого.", type: "B" },
+                { text: "Что мир разучится чувствовать прекрасное.", type: "C" },
+                { text: "Что сядет батарея на смартфоне, а Wi-Fi отключат.", type: "D" }
+            ]
+        }
+    ];
+
+    const results = {
+        A: {
+            weapon: "🏺 Ржавый мушкет 18 века",
+            desc: "Палач будет очень долго заряжать оружие, сыпать порохом и материться. У тебя будет куча времени, чтобы переосмыслить жизнь, написать завещание и даже научить его играть в шахматы. Скорее всего, он промахнется, а ты умрешь от скуки и старости, так и не дождавшись выстрела."
+        },
+        B: {
+            weapon: "🔫 Пневматический пистолет",
+            desc: "Это не смертельно, но ужасно обидно. Палач просто хотел пошутить и проверить, больно ли это. Ты будешь ходить с синяками еще неделю, а коллеги будут над тобой смеяться. Официальный расстрел перенесется на следующий месяц, когда на складе найдут нормальные стволы."
+        },
+        C: {
+            weapon: "📖 Томик стихов Александра Пушкина",
+            desc: "Да, это буквальная ПУШ-КИН. Палач зачитает тебе 'Евгения Онегина' с выражением, а затем кинет в тебя тяжелым Hardcover-изданием 1985 года. Смерть наступит мгновенно от культурного шока и осознания, что ты в школе это всё равно не читал."
+        },
+        D: {
+            weapon: "🔦 Мощная лазерная указка",
+            desc: "Тебя будут слепить красной точкой в лоб, пока ты не признашь все свои грехи. Это чисто психологическое оружие. В итоге ты сам напишешь явку с повинную и попросишь, чтобы тебя пристрелили по-человечески, но палач просто уйдет кормить кота."
+        }
+    };
+
+    let currentQuestion = 0;
+    let scores = { A: 0, B: 0, C: 0, D: 0 };
+    const app = document.getElementById('app');
+
+    function renderStart() {
+        app.innerHTML = `
+            <h1>🎯 Чем тебя расстреляют?</h1>
+            <p class="subtitle">Пройди этот секретный тест, чтобы узнать свою судьбу.<br>(Шутка, конечно, но лучше быть готовым).</p>
+            <button class="restart-btn" onclick="startQuiz()" style="width: 100%;">Начать допрос</button>
+        `;
+    }
+
+    function startQuiz() {
+        currentQuestion = 0;
+        scores = { A: 0, B: 0, C: 0, D: 0 };
+        renderQuestion();
+    }
+
+    function renderQuestion() {
+        if (currentQuestion >= quizData.length) {
+            showResult();
+            return;
+        }
+
+        const q = quizData[currentQuestion];
+        const progress = ((currentQuestion) / quizData.length) * 100;
+
+        let optionsHtml = q.options.map(opt => 
+            `<button class="option-btn" onclick="selectAnswer('${opt.type}')">${opt.text}</button>`
+        ).join('');
+
+        app.innerHTML = `
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: ${progress}%"></div>
+            </div>
+            <div class="question-block">
+                <div class="question-text">${q.question}</div>
+                <div class="options">
+                    ${optionsHtml}
+                </div>
+            </div>
+        `;
+    }
+
+    function selectAnswer(type) {
+        scores[type]++;
+        currentQuestion++;
+        renderQuestion();
+    }
+
+    function showResult() {
+        // Определяем победителя
+        let maxType = 'A';
+        let maxScore = 0;
+        for (let type in scores) {
+            if (scores[type] > maxScore) {
+                maxScore = scores[type];
+                maxType = type;
+            }
+        }
+
+        const result = results[maxType];
+
+        app.innerHTML = `
+            <div class="result-block">
+                <h1>Твой приговор:</h1>
+                <div class="result-weapon">${result.weapon}</div>
+                <div class="result-desc">${result.desc}</div>
+                <button class="restart-btn" onclick="startQuiz()">Пройти заново</button>
+            </div>
+        `;
+    }
+
+    // Инициализация
+    renderStart();
+</script>
+
+</body>
+</html>
